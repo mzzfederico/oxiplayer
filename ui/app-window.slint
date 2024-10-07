@@ -1,0 +1,45 @@
+import { Button, HorizontalBox, VerticalBox } from "std-widgets.slint";
+import { Controls } from "controls.slint";
+
+export component AppWindow inherits Window {
+    callback emit(string);
+    in-out property <string> player_status;
+    in-out property <string> song_title;
+    in-out property <string> song_artist;
+    in-out property <string> song_album;
+    in-out property <image> cover;
+    
+    title: "Music Player";
+
+    VerticalBox {
+        cover := VerticalBox {
+            height: 250px;
+            width: 200px;
+            Text {
+                text: player_status;
+            }
+            Image {
+                height: 150px;
+                width: 150px;
+                source: root.cover;
+            }
+            VerticalBox {
+                height: 50px;
+                Text {
+                    text: song_title;
+                }
+                Text {
+                    text: song_artist;
+                }
+                Text {
+                    text: song_album;
+                }
+            }
+        }
+        controls := Controls {
+            emit(cmd) => { emit(cmd) }
+            status <=> player_status;
+        }
+    }
+}
+

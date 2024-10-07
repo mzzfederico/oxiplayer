@@ -1,0 +1,31 @@
+import { HorizontalBox, Button } from "std-widgets.slint";
+
+export component Controls inherits HorizontalBox {
+    callback emit(string);
+    in-out property <string> status;
+
+    Button {
+        height: 64px;
+        width: 64px;
+        text: "⏮";
+        clicked => {
+            emit("rewind");
+        }
+    }
+    Button {
+        height: 64px;
+        width: 64px;
+        text: "⏯";
+        clicked => {
+            emit("play");
+        }
+    }
+    Button {
+        height: 64px;
+        width: 64px;
+        text: "⏭";
+        clicked => {
+            emit("forward");
+        }
+    }
+}
