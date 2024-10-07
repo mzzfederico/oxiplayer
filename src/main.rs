@@ -1,6 +1,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use std::cell::RefCell;
 use std::error::Error;
 use std::io::BufReader;
 use id3::{Tag, TagLike};
@@ -34,15 +33,6 @@ impl PlayerState {
             PlayerState::Paused => "paused",
             PlayerState::Stopped => "stopped",
         }
-    }
-}
-
-fn apply_action(action: &str, sink: &rodio::Sink) {
-    match action {
-        "play" => sink.play(),
-        "pause" => sink.pause(),
-        "stop" => sink.stop(),
-        _ => {}
     }
 }
 
@@ -84,9 +74,9 @@ fn play_button(ui: &AppWindow, sink: &rodio::Sink) {
         ui.set_player_status(PlayerState::Paused.as_str().into());
         sink.pause();
     } else {
-    ui.set_player_status(PlayerState::Playing.as_str().into());
-    sink.play();
-        }
+        ui.set_player_status(PlayerState::Playing.as_str().into());
+        sink.play();
+    }
 }
 
 fn pause_button(ui: &AppWindow, sink: &rodio::Sink) {
